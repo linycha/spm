@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spm.modules.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.spm.modules.entity.Product">
+    <!--@mbg.generated-->
+    <!--@Table spm_product-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="grade_price" jdbcType="DECIMAL" property="gradePrice" />
+    <result column="production_date" jdbcType="TIMESTAMP" property="productionDate" />
+    <result column="expiration_date" jdbcType="INTEGER" property="expirationDate" />
+    <result column="closed_date" jdbcType="TIMESTAMP" property="closedDate" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, remark, price, grade_price, production_date, expiration_date, closed_date, 
+    stock, `status`, remarks, del_flag, create_time, update_time
+  </sql>
+  <select id="selectPage" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from spm_product where del_flag = 0
+    <if test="dto.status != null and dto.status != ''">
+      and status = #{dto.status}
+    </if>
+    <if test="dto.name != null and dto.name != ''">
+      and name like "%" #{dto.name} "%"
+    </if>
+    <if test="dto.isOverdue != null and dto.isOverdue == 0">
+      and closed_date >= now()
+    </if>
+    <if test="dto.isOverdue != null and dto.isOverdue == 1">
+      and closed_date &lt; now()
+    </if>
+    <if test="dto.price != null and dto.price != ''">
+      and price = #{dto.price}
+    </if>
+  </select>
+</mapper>

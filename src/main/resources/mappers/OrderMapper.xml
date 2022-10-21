@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spm.modules.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.spm.modules.entity.Order">
+    <!--@mbg.generated-->
+    <!--@Table spm_order-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="INTEGER" property="orderNo" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="grade_id" jdbcType="INTEGER" property="gradeId" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
+    <result column="pay_price" jdbcType="DECIMAL" property="payPrice" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, order_no, product_id, grade_id, num, total_price, pay_price, remarks, del_flag, 
+    create_time, update_time
+  </sql>
+
+  <select id="selectPage" resultType="com.spm.modules.dto.OrderReturnDTO">
+    select order_no,GROUP_CONCAT(CONCAT(p.name,'×',o.num)) productStr,
+           sum(o.total_price) totalPrice, sum(o.pay_price) payPrice,o.create_time
+    from spm_order o left join spm_product p on p.id = o.product_id
+    group by order_no order by o.create_time desc
+  </select>
+
+  <select id="selectOrderCount" resultType="com.spm.modules.dto.OrderCountDTO">
+    select p.`name` name, DATE_FORMAT(o.create_time, #{dto.date}) date,
+           sum(o.num) numSum, sum(o.pay_price) payPriceSum from spm_order o
+           left join spm_product p on p.id = o.product_id
+    where o.del_flag = 0
+    <if test="dto.name != null and dto.name != ''">
+      and p.name like "%" #{dto.name} "%"
+    </if>
+    group by o.product_id, DATE_FORMAT(o.create_time, #{dto.date})
+    order by o.create_time desc
+  </select>
+</mapper>

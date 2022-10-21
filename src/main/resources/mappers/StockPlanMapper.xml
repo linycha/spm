@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spm.modules.dao.StockPlanMapper">
+  <resultMap id="BaseResultMap" type="com.spm.modules.entity.StockPlan">
+    <!--@mbg.generated-->
+    <!--@Table spm_stock_plan-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="del_flag" jdbcType="BOOLEAN" property="delFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, title, content, `status`, remarks, del_flag, create_time, update_time
+  </sql>
+
+  <select id="selectPage" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from spm_stock_plan where del_flag = 0
+    <if test="dto.title != null and dto.title != ''">
+      and title like "%" #{dto.title} "%"
+    </if>
+  </select>
+</mapper>
