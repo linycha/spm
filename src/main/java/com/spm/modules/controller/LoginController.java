@@ -22,8 +22,6 @@ import java.util.Map;
 @RequestMapping
 @Api(tags = "登录相关接口")
 public class LoginController {
-    @Autowired
-    private UserService userService;
 
     @GetMapping("login")
     public Res<Map<String,Object>> login(String username, String password){
