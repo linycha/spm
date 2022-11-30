@@ -2,12 +2,12 @@
 ### 介绍
 本项目是基于SpringBoot、Vue的超市收银管理系统，有商品管理、角色管理、收银管理、报表管理、入库管理、会员管理、系统员工管理等主要功能。
 
-  :thumbsup:  :thumbsup:  :thumbsup: **麻烦拉取代码的各位同学点点Star!!!** 
+  :thumbsup:  :thumbsup:  :thumbsup: **请拉取代码的各位同学点点Star!!!** 
 
 需要前端VUE源码的可联系开发者。
 
 #### 软件架构
-JDK11、SpringBoot、Vue、MybatisPlus、Mysql8.0、redis、Shiro安全框架，elementUI。
+JDK11、SpringBoot、Vue全家桶、MybatisPlus、Mysql8.0、redis、Shiro安全框架，elementUI。
 
 #### 功能说明
 
