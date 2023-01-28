@@ -1,7 +1,7 @@
 ### 介绍
 本项目是基于SpringBoot、Vue的超市收银管理系统，有商品管理、角色管理、收银管理、报表管理、入库管理、会员管理、系统员工管理等主要功能。
 
-  :thumbsup:  :thumbsup:  :thumbsup: **麻烦各位走过路过的同学点点Star!!!** 
+  :thumbsup:  :thumbsup:  :thumbsup: **麻烦各位拉取代码的兄弟们点点Star!!!** 
 
 需要前端VUE源码的可联系开发者。
 
